@@ -4,25 +4,38 @@ import { NgModule } from '@angular/core';
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import {HttpClientModule} from "@angular/common/http";
-import { StartPageComponent } from './start-page/start-page.component';
 import { RouterModule, Routes } from "@angular/router";
 import { NavbarComponent } from './navbar/navbar.component';
-import { LoginPageComponent } from './login-page/login-page.component';
 import { SignInComponent } from './sign-in/sign-in.component';
+import { ModalComponent } from './modal/modal.component';
+import { MainpageComponent } from './mainpage/mainpage.component';
+import { CardComponent } from './card/card.component';
+import { FooterComponent } from './footer/footer.component';
+import { WalletsPageComponent } from './wallets-page/wallets-page.component';
+import { WalletComponent } from './wallet/wallet.component';
+import { SubscriptionsPageComponent } from './subscriptions-page/subscriptions-page.component';
+import { SubCardComponent } from './sub-card/sub-card.component';
 
 const appRoutes: Routes = [
-  {path: '', component:StartPageComponent},
-  {path: 'login', component:LoginPageComponent},
-  {path: 'signin', component:LoginPageComponent},
+  {path: '', component:MainpageComponent},
+  {path: 'signin', component:SignInComponent},
+  {path: 'subscriptions', component:SubscriptionsPageComponent},
+  {path: 'wallets', component:WalletsPageComponent},
 ]
 
 @NgModule({
   declarations: [
     AppComponent,
-    StartPageComponent,
     NavbarComponent,
-    LoginPageComponent,
-    SignInComponent
+    SignInComponent,
+    ModalComponent,
+    MainpageComponent,
+    CardComponent,
+    FooterComponent,
+    WalletsPageComponent,
+    WalletComponent,
+    SubscriptionsPageComponent,
+    SubCardComponent
   ],
   imports: [
     BrowserModule,
