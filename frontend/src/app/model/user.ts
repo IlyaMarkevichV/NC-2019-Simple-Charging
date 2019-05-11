@@ -1,23 +1,25 @@
 import {Role} from "./role";
 
 export class User {
-  id: string;
-  name: string;
-  surname: string;
-  login: string;
-  password: string;
+  userId: string;
+  userName: string;
+  userSurname: string;
+  userLogin: string;
+  userPassword: string;
   role: Role;
-  dateOfBirth: Date;
+  userBirthDate: Date;
+  userEmail : string;
 
   static cloneBase(user: User): User{
     let clonedUser: User=new User();
-    clonedUser.id=user.id;
-    clonedUser.name=user.name;
-    clonedUser.surname=user.surname;
-    clonedUser.login=user.login;
-    clonedUser.password=user.password;
+    clonedUser.userId=user.userId;
+    clonedUser.userName=user.userName;
+    clonedUser.userSurname=user.userSurname;
+    clonedUser.userLogin=user.userLogin;
+    clonedUser.userPassword=user.userPassword;
     clonedUser.role=user.role;
-    clonedUser.dateOfBirth=user.dateOfBirth;
+    clonedUser.userBirthDate=user.userBirthDate;
+    clonedUser.userEmail=user.userEmail;
     return clonedUser;
   }
 }

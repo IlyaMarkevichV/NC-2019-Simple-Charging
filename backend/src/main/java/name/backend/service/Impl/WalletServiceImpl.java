@@ -6,8 +6,6 @@ import name.backend.service.WalletService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import java.util.Collection;
-
 @Service
 public class WalletServiceImpl implements WalletService {
     @Autowired
@@ -23,7 +21,8 @@ public class WalletServiceImpl implements WalletService {
     }
 
     @Override
-    public Iterable<WalletEntity> findAll() {
-        return repository.findAll();
+    public Iterable<WalletEntity> findAll(int id) {
+        return repository.findAllByUserUserId(id);
     }
+
 }

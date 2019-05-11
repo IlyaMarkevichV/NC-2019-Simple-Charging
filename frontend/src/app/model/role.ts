@@ -1,4 +1,9 @@
 export class Role {
-  id: string;
+  roleId: number;
   role: string;
+
+  setRole(role : string, id: number){
+    this.role=role;
+    this.roleId=id;
+  }
 }

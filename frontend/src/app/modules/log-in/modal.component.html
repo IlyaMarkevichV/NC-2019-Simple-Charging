@@ -1,0 +1,37 @@
+<div class="modal fade" id="MyModal" tabindex="-1" role="dialog" aria-labelledby="MyModalLabel" aria-hidden="true">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header bg-warning border-bottom-0">
+        <h4 class="modal-title" id="MyModalLabel">Authorization</h4>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+        <div class="input-group mb-3">
+          <div class="input-group-prepend">
+            <span class="input-group-text" id="inputLogPrepend">
+             <img width="20px" src="https://png.pngtree.com/svg/20160308/_user_profile_icon_1108089.png"/>
+            </span>
+          </div>
+          <input type="text" class="form-control" id="inputLog" [(ngModel)]="user.login" placeholder="Login">
+        </div>
+        <div class="input-group">
+          <div class="input-group-prepend">
+            <span class="input-group-text" id="inputPassPrepend">
+              <img width="20px" src="https://cdn4.iconfinder.com/data/icons/glyphs/24/icons_password-512.png"/>
+            </span>
+          </div>
+          <input type="password" class="form-control" id="inputPass" [(ngModel)]="user.password" placeholder="Password">
+        </div>
+      </div>
+      <div class="modal-footer border-top-0 justify-content-between">
+        <a class="btn btn-light" data-dismiss="modal" routerLink="signin">Sign up</a>
+        <div class="form-row">
+        <button type="button" class="btn btn-dark" data-dismiss="modal">Close</button>
+        <button type="submit" class="btn btn-danger ml-2" (click)="autorUser()">Log in</button>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

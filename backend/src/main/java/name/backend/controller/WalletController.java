@@ -6,9 +6,11 @@ import name.backend.Entities.WalletEntity;
 import name.backend.service.WalletService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.*;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.RestController;
 
-import java.sql.Date;
 import java.time.LocalDate;
 
 @RestController
@@ -24,7 +26,7 @@ public class WalletController {
         WalletEntity walletEntity=new WalletEntity();
         roleEntity.setRole("admin");
         userEntity.setRole(roleEntity);
-        userEntity.setUserBirthDate(Date.valueOf(LocalDate.now()));
+        userEntity.setUserBirthDate(LocalDate.now());
         userEntity.setUserEmail("asdasd@asdad.as");
         userEntity.setUserLogin("Weesqq");
         userEntity.setUserName("Ilya");
@@ -40,7 +42,7 @@ public class WalletController {
 
     @RequestMapping(value = "/test-get", method = RequestMethod.GET)
     public ResponseEntity<Iterable<WalletEntity>> showAll() {
-        return ResponseEntity.ok(service.findAll());
+        return ResponseEntity.ok(service.findAll(1));
     }
 
     @RequestMapping(value = "/test-delete", method = RequestMethod.GET)

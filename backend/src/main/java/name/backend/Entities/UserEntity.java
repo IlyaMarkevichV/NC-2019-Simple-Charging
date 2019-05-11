@@ -1,19 +1,33 @@
 package name.backend.Entities;
 
 import javax.persistence.*;
-import java.sql.Date;
+import java.time.LocalDate;
 
 @Entity
-@Table(name = "user", schema = "chargingdb", catalog = "")
+@Table(name = "user", schema = "chargingdb")
 public class UserEntity {
     private int userId;
     private String userName;
     private String userSurname;
-    private Date userBirthDate;
+    private LocalDate userBirthDate;
     private String userEmail;
     private String userLogin;
     private String userPassword;
     private RoleEntity role;
+
+    @Override
+    public String toString() {
+        return "UserEntity{" +
+                "userId=" + userId +
+                ", userName='" + userName + '\'' +
+                ", userSurname='" + userSurname + '\'' +
+                ", userBirthDate=" + userBirthDate +
+                ", userEmail='" + userEmail + '\'' +
+                ", userLogin='" + userLogin + '\'' +
+                ", userPassword='" + userPassword + '\'' +
+                ", role=" + role +
+                '}';
+    }
 
     @Id
     @Column(name = "user_id")
@@ -48,11 +62,11 @@ public class UserEntity {
 
     @Basic
     @Column(name = "user_birth_date")
-    public Date getUserBirthDate() {
+    public LocalDate getUserBirthDate() {
         return userBirthDate;
     }
 
-    public void setUserBirthDate(Date userBirthDate) {
+    public void setUserBirthDate(LocalDate userBirthDate) {
         this.userBirthDate = userBirthDate;
     }
 
@@ -118,8 +132,8 @@ public class UserEntity {
         return result;
     }
 
-    @ManyToOne(cascade = CascadeType.ALL)
-    @JoinColumn(name = "role_id")
+    @ManyToOne
+        @JoinColumn(name = "role_id")
     public RoleEntity getRole(){return role;}
 
     public void setRole(RoleEntity role){this.role=role;}

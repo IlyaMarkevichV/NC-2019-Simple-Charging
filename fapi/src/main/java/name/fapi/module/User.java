@@ -4,7 +4,8 @@ import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
-import java.util.Date;
+import java.time.LocalDate;
+
 
 @Data
 @AllArgsConstructor
@@ -13,7 +14,7 @@ public class User {
     private int userId;
     private String userName;
     private String userSurname;
-    private Date userBirthDate;
+    private LocalDate userBirthDate;
     private String userEmail;
     private String userLogin;
     private String userPassword;

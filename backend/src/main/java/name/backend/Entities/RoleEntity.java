@@ -3,10 +3,18 @@ package name.backend.Entities;
 import javax.persistence.*;
 
 @Entity
-@Table(name = "role", schema = "chargingdb", catalog = "")
+@Table(name = "role", schema = "chargingdb")
 public class RoleEntity {
     private int roleId;
     private String role;
+
+    @Override
+    public String toString() {
+        return "RoleEntity{" +
+                "roleId=" + roleId +
+                ", role='" + role + '\'' +
+                '}';
+    }
 
     @Id
     @Column(name = "role_id")

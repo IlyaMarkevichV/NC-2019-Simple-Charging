@@ -17,5 +17,15 @@ public class UserServiceImpl implements UserService {
     @Override
     public void deleteUser(Integer id){repository.deleteById(id);}
 
+    @Override
+    public UserEntity findByLogin(String login) {
+        return repository.findByUserLogin(login);
+    }
+
+    @Override
+    public UserEntity findUsername(String login) {
+        return repository.findByUserLogin(login);
+    }
+
 
 }
