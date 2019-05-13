@@ -1,6 +1,6 @@
 import {Product} from "./product";
 
 export class PageDTO{
-  products: Product[];
+  productList: Product[];
   pages: number;
 }

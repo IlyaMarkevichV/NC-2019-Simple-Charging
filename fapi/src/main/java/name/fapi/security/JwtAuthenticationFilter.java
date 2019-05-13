@@ -31,12 +31,12 @@ public class JwtAuthenticationFilter extends OncePerRequestFilter {
     protected void doFilterInternal(HttpServletRequest request, HttpServletResponse response, FilterChain chain) throws ServletException, IOException {
 
         String header = request.getHeader(SecurityJwtConstants.HEADER_STRING);
-        String userName = null;
+        String username = null;
         String authToken = null;
         if (header != null && header.startsWith(SecurityJwtConstants.TOKEN_PREFIX)) {
             authToken = header.replace(SecurityJwtConstants.TOKEN_PREFIX, "");
             try {
-                userName = tokenProvider.getUsernameFromToken(authToken);
+                username = tokenProvider.getUsernameFromToken(authToken);
             } catch (IllegalArgumentException e) {
                 logger.error("An error occurred during getting username from token.", e);
             } catch (ExpiredJwtException e) {
@@ -48,13 +48,13 @@ public class JwtAuthenticationFilter extends OncePerRequestFilter {
         else {
             logger.warn("Couldn't find bearer string, will ignore the header.");
         }
-        if(userName!= null && SecurityContextHolder.getContext().getAuthentication() == null){
-            UserDetails userDetails = userDetailsService.loadUserByUsername(userName);
+        if(username!= null && SecurityContextHolder.getContext().getAuthentication() == null){
+            UserDetails userDetails = userDetailsService.loadUserByUsername(username);
 
             if(tokenProvider.validateToken(authToken, userDetails)){
                 UsernamePasswordAuthenticationToken authentication = tokenProvider.getAuthentication(authToken, SecurityContextHolder.getContext().getAuthentication(), userDetails);
                 authentication.setDetails(new WebAuthenticationDetailsSource().buildDetails(request));
-                logger.info("Authenticated user " + userName + ", setting security context.");
+                logger.info("Authenticated user " + username + ", setting security context.");
                 SecurityContextHolder.getContext().setAuthentication(authentication);
             }
         }

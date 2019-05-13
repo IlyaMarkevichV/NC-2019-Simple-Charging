@@ -2,7 +2,7 @@ import {User} from "./user";
 import {Category} from "./category";
 
 export class Product{
-  productId: string;
+  productId: number;
   productName: string;
   productDescription: string;
   productCost: string;

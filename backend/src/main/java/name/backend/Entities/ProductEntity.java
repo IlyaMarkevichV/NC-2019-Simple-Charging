@@ -81,7 +81,7 @@ public class ProductEntity {
         return result;
     }
 
-    @ManyToOne(cascade = CascadeType.ALL)
+    @ManyToOne
     @JoinColumn(name="product_category_id")
     public CategoryEntity getCategory() {
         return category;
@@ -91,7 +91,7 @@ public class ProductEntity {
         this.category = category;
     }
 
-    @ManyToOne(cascade = CascadeType.ALL)
+    @ManyToOne
     @JoinColumn(name = "product_user_id")
     public UserEntity getUser() {
         return user;

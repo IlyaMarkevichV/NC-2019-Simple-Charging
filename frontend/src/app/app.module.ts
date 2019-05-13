@@ -3,7 +3,7 @@ import {NgModule} from '@angular/core';
 
 import {AppRoutingModule} from './app-routing.module';
 import {AppComponent} from './app.component';
-import {HTTP_INTERCEPTORS, HttpClientModule} from "@angular/common/http";
+import {HTTP_INTERCEPTORS, HttpClientModule} from '@angular/common/http';
 import {RouterModule, Routes} from "@angular/router";
 import {NavbarComponent} from './modules/navbar/navbar.component';
 import {SignInComponent} from './modules/sign-in/sign-in.component';
@@ -25,7 +25,8 @@ import {Guard} from "./guard";
 import {MainPageService} from "./service/mainPage/mainPage.service";
 
 const appRoutes: Routes = [
-  {path: '', component:MainpageComponent},
+  {path: 'home', component:MainpageComponent},
+  {path: '', redirectTo: 'home', pathMatch: 'full'},
   {path: 'signin', component:SignInComponent},
   {path: 'subscriptions', component:SubscriptionsPageComponent},
   {path: 'wallets', component:WalletsPageComponent},
@@ -43,7 +44,7 @@ const appRoutes: Routes = [
     WalletsPageComponent,
     WalletComponent,
     SubscriptionsPageComponent,
-    SubCardComponent
+    SubCardComponent,
   ],
   imports: [
     BrowserModule,

@@ -3,6 +3,7 @@ import {MainPageService} from "../../service/mainPage/mainPage.service";
 import {Product} from "../../model/product";
 import {PageDTO} from "../../model/pageDTO";
 
+
 @Component({
   selector: 'app-mainpage',
   templateUrl: './mainpage.component.html',
@@ -16,14 +17,14 @@ export class MainpageComponent implements OnInit {
   totalpages: number;
   direction: number;
   categories:any;
-  products:Product[];
+  productList:Product[];
   pageDTO: PageDTO;
 
   constructor(private service:MainPageService) {
     this.page = 0;
     this.itemsPerPage = 6;
     this.direction = 1;
-
+    this.pageDTO= new PageDTO();
   }
 
   ngOnInit() {
@@ -33,8 +34,9 @@ export class MainpageComponent implements OnInit {
   loadProductsPage(page, itemsPerpage, direction){
     this.service.getProducts(page, itemsPerpage, direction).subscribe(data=>{
       this.pageDTO = data as PageDTO ;
-      this.products=this.pageDTO.products;
-      co
+      console.log(this.pageDTO.productList);
+      this.productList=this.pageDTO.productList;
+      console.log(this.productList);
       this.totalpages= this.pageDTO.pages;
       }
     );

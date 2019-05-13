@@ -1,16 +1,14 @@
 package name.fapi.controller;
 
 import name.fapi.module.PageDTO;
+import name.fapi.module.Product;
 import name.fapi.service.ProductService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 @RestController
-@RequestMapping("/api/products")
+@RequestMapping("/api/product")
 public class ProductController {
     @Autowired
     private ProductService productService;
@@ -29,6 +27,12 @@ public class ProductController {
                                                        @RequestParam(value = "size") int size,
                                                        @RequestParam(value = "dir") int dir){
         return ResponseEntity.ok(productService.searchProduct(search, page, size, dir));
+    }
+
+    @PostMapping("/save")
+    public ResponseEntity<Product> saveProduct(@RequestBody Product product){
+
+        return ResponseEntity.ok(productService.saveProduct(product));
     }
 
 }

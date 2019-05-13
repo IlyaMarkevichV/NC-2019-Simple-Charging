@@ -23,4 +23,9 @@ public class ProductServiceImpl implements ProductService {
     public Page<ProductEntity> searchProduct(Pageable pageable, String string) {
         return productRepository.findAllByProductNameStartsWith(pageable, string);
     }
+
+    @Override
+    public ProductEntity saveProduct(ProductEntity product) {
+        return productRepository.save(product);
+    }
 }

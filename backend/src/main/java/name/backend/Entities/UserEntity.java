@@ -133,7 +133,7 @@ public class UserEntity {
     }
 
     @ManyToOne
-        @JoinColumn(name = "role_id")
+    @JoinColumn(name = "role_id")
     public RoleEntity getRole(){return role;}
 
     public void setRole(RoleEntity role){this.role=role;}

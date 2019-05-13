@@ -8,8 +8,8 @@ import java.time.LocalDate;
 
 
 @Data
-@AllArgsConstructor
 @NoArgsConstructor
+@AllArgsConstructor
 public class User {
     private int userId;
     private String userName;

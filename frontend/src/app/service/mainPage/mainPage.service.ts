@@ -11,7 +11,7 @@ export class MainPageService {
   }
 
   getProducts(page: number, size: number, dir: number): Observable<any> {
-    return this.http.get('api/products/page?page=' + page + '&size=' + size + '&dir=' + dir);
+    return this.http.get('api/product/page?page=' + page + '&size=' + size + '&dir=' + dir);
   }
 
 }

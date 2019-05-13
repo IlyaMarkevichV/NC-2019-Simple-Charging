@@ -23,8 +23,8 @@ public class AuthenticationController {
     @Autowired
     private TokenProvider tokenProvider;
 
-    @PostMapping(value = "/generate-token")
-    public ResponseEntity registration(@RequestBody LoginUser loginUser)throws AuthenticationException {
+    @RequestMapping(value = "/generate-token", method = RequestMethod.POST)
+    public ResponseEntity registr(@RequestBody LoginUser loginUser)throws AuthenticationException {
         final Authentication authentication = authenticationManager.authenticate(
                 new UsernamePasswordAuthenticationToken(
                     loginUser.getLogin(),
