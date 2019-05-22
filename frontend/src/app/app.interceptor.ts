@@ -8,7 +8,7 @@ import {
   HttpResponse
 } from "@angular/common/http";
 import {Observable} from "rxjs";
-import {TokenStorage} from "./token/tokenStorage";
+import {TokenStorage} from "./storage/tokenStorage";
 import {Router} from "@angular/router";
 import {tap} from "rxjs/operators";
 
@@ -40,7 +40,7 @@ export class Interceptor implements HttpInterceptor{
         console.error("Interceptor log error", err);
         if (err instanceof HttpErrorResponse) {
           if (err.status === 401) {
-            this.router.navigate(['login']);
+            this.router.navigate(['home']);
           }
         }
       }

@@ -3,20 +3,20 @@ package name.backend.Entities;
 import java.util.List;
 
 public class PageDTO {
-    private List productList;
+    private List list;
     private int pages;
 
     public PageDTO(List productEntityList, int pages) {
-        this.productList = productEntityList;
+        this.list = productEntityList;
         this.pages = pages;
     }
 
-    public List getProductList() {
-        return productList;
+    public List getList() {
+        return list;
     }
 
-    public void setProductList(List productEntityList) {
-        this.productList = productEntityList;
+    public void setList(List productEntityList) {
+        this.list = productEntityList;
     }
 
     public int getPages() {
@@ -30,7 +30,7 @@ public class PageDTO {
     @Override
     public String toString() {
         return "PageDTO{" +
-                "productEntityList=" + productList +
+                "productEntityList=" + list +
                 ", pages=" + pages +
                 '}';
     }

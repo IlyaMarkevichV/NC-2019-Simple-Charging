@@ -2,3 +2,11 @@
   width: 18rem;
   margin: 20px;
 }
+
+#cards{
+  min-height : 470px;
+}
+
+.button{
+  margin: 20px;
+}

@@ -14,4 +14,12 @@ export class RegistrService {
   {
     return this.http.post<User>('/api/user/signup', user);
   }
+
+  loadRoles(): Observable<any>{
+    return this.http.get('api/role/all');
+  }
+
+  getUserByLogin(login: string): Observable<any>{
+    return this.http.get<User>('/api/user/check?login='+login);
+  }
 }

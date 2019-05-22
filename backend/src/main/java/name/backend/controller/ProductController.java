@@ -40,7 +40,17 @@ public class ProductController {
     }
 
     @PostMapping("/save")
-    public  ResponseEntity<ProductEntity> saveProduct(@RequestBody ProductEntity product){
+    public ResponseEntity<ProductEntity> saveProduct(@RequestBody ProductEntity product){
         return ResponseEntity.ok(productService.saveProduct(product));
+    }
+
+    @DeleteMapping("/delete")
+    public void deleteProduct(@RequestParam(value = "id") int id){
+        productService.deleteProduct(id);
+    }
+
+    @GetMapping("get")
+    public ResponseEntity<ProductEntity> getProduct(@RequestParam(value = "id") int id){
+        return ResponseEntity.ok(productService.getProductById(id));
     }
 }

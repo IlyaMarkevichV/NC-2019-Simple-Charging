@@ -1,72 +1,162 @@
+<div class="form-row justify-content-center w-100 p-5">
+  <div class="w-50">
+    <form class="form-horizontal" [formGroup]="form">
+      <div class="form-group" [ngClass]="displayFieldCss('name')">
+        <div class="col-sm-12">
+          <input type="text" id="name" class="form-control" formControlName="name" placeholder="Name">
+          <app-field-error-display
+            [displayError]="isFieldValid('name')"
+            errorMsg="Incorrect Name">
+          </app-field-error-display>
+        </div>
+      </div>
+
+      <div class="form-group" [ngClass]="displayFieldCss('surName')">
+        <div class="col-sm-12">
+          <input type="text" id="surName" class="form-control" formControlName="surName" placeholder="Second Name">
+          <app-field-error-display
+            [displayError]="isFieldValid('surName')"
+            errorMsg="Incorrect Second Name">
+          </app-field-error-display>
+        </div>
+      </div>
+
+
+      <div class="form-group" [ngClass]="displayFieldCss('dateOfBirth')">
+        <div class="col-sm-12">
+          <abbr title="Birth Date">
+            <input type="date" id="dateOfBirth" class="form-control" formControlName="dateOfBirth">
+          </abbr>
+          <app-field-error-display
+            [displayError]="isFieldValid('dateOfBirth')"
+            errorMsg="Incorrect Birth Date">
+          </app-field-error-display>
+        </div>
+        <!--&lt;!&ndash; <div class="input-group-prepend">
+        &lt;!&ndash; <span class="input-group-text" id="inputDatePrepend">
+           <img width="20px" src="http://cdn.onlinewebfonts.com/svg/img_202280.png"/>
+         </span>&ndash;&gt;
+         </div>&ndash;&gt;
+         <input type="date" class="form-control" id="inputDate" [(ngModel)]="user.userBirthDate" required>-->
+      </div>
+
+
+      <div class="form-group" [ngClass]="displayFieldCss('email')">
+        <div class="col-sm-12">
+          <input type="text" id="email" class="form-control" formControlName="email" placeholder="Email">
+          <app-field-error-display
+            [displayError]="isFieldValid('email')"
+            errorMsg="Incorrect Email">
+          </app-field-error-display>
+        </div>
+      </div>
+
+      <div class="form-group" [ngClass]="displayFieldCss('login')">
+        <div class="col-sm-12">
+          <input type="text" id="login" class="form-control" formControlName="login" placeholder="Login">
+          <app-field-error-display
+            [displayError]="isFieldValid('login')"
+            errorMsg="Incorrect Login">
+          </app-field-error-display>
+        </div>
+      </div>
+
+      <div class="form-group" [ngClass]="displayFieldCss('password')">
+        <div class="col-sm-12">
+          <input type="password" id="password" class="form-control" formControlName="password" placeholder="Password">
+          <app-field-error-display
+            [displayError]="isFieldValid('password')"
+            errorMsg="Incorrect Password">
+          </app-field-error-display>
+        </div>
+      </div>
+      <div class="form-row justify-content-between">
+     <div class="dropdown">
+        <button class="btn btn-warning dropdown-toggle" type="button" id="dropdownMenu2" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+          {{user.role.role}}
+        </button>
+        <div class="dropdown-menu" aria-labelledby="dropdownMenu2">
+          <button class="dropdown-item" *ngFor="let data of roles" type="button"
+                  (click)="setRole(data)">{{data.role}}</button>
+        </div>
+      </div>
+      <button class="btn btn-danger" (click)="onSubmit()">Submit</button>
+      </div>
+    </form>
+  </div>
+</div>
+
+<!--
 <div class="SignIn">
   <header class="header m-4 text-center" id="SignInHeader">
     <h1>Registration</h1>
   </header>
-  <div class="form-row m-3 align-content-between col-md-12 p-0">
-    <div class="input-group col-md-6 pl-0">
-      <div class="input-group-prepend">
-      <span class="input-group-text" id="inputNamePrepend">
-        <img width="20px" src="https://img.icons8.com/material/24/000000/user-male.png"/>
-      </span>
+  <form [formGroup]="userForm">
+    <div class="form-group">
+      <div class="input-group">
+        <div class="input-group-prepend">
+          <span class="input-group-text"><i class="fas fa-user"></i></span>
+        </div>
+        <input type="text" placeholder="Name" class="form-control" formControlName="userName">
       </div>
-      <input type="text" class="form-control" id="inputName" [(ngModel)]="user.userName" required placeholder="Enter Name">
     </div>
-    <div class="input-group col-md-6 pr-0">
-      <div class="input-group-prepend">
-      <span class="input-group-text" id="inputSirNamePrepend">
-        <img width="20px" src="https://img.icons8.com/material/24/000000/user-male.png"/>
-      </span>
+    <div class="form-group">
+      <div class="input-group">
+        <div class="input-group-prepend">
+          <span class="input-group-text"><i class="fas fa-user"></i></span>
+        </div>
+        <input type="text" placeholder="Second Name" class="form-control" formControlName="userSurName">
       </div>
-      <input type="text" class="form-control" id="inputSirName" [(ngModel)]="user.userSurname" required placeholder="Enter Second Name">
     </div>
-  </div>
-  <div class="input-group col-md-12 p-0 m-3">
-    <div class="input-group-prepend">
-      <span class="input-group-text" id="inputLoginPrepend">
-        <img width="20px" src="https://png.pngtree.com/svg/20160308/_user_profile_icon_1108089.png"/>
-      </span>
+    <div class="form-group">
+      <div class="input-group">
+        <div class="input-group-prepend">
+          <span class="input-group-text"><i class="fas fa-user"></i></span>
+        </div>
+        <input type="text" placeholder="Email" class="form-control" formControlName="userEmail">
+      </div>
     </div>
-    <input type="text" class="form-control" id="inputLogin" [(ngModel)]="user.userLogin" required placeholder="Enter Login">
-  </div>
-  <abbr title="Birth Date">
-    <div class="input-group col-md-12 p-0 m-3">
-      <div class="input-group-prepend">
+    <abbr title="Birth Date">
+    <div class="form-group">
+      <div class="input-group">
+            <div class="input-group-prepend">
       <span class="input-group-text" id="inputDatePrepend">
-        <img width="20px" src="http://cdn.onlinewebfonts.com/svg/img_202280.png"/>
+        &lt;!&ndash;<img width="20px" src="http://cdn.onlinewebfonts.com/svg/img_202280.png"/>&ndash;&gt;
       </span>
-      </div>
-      <input type="date" class="form-control" id="inputDate" [(ngModel)]="user.userBirthDate" required>
-    </div>
-  </abbr>
-  <div class="input-group col-md-12 p-0 m-3">
-    <div class="input-group-prepend">
-      <span class="input-group-text" id="inputPasswordPrepend">
-        <img width="20px" src="https://cdn4.iconfinder.com/data/icons/glyphs/24/icons_password-512.png"/>
-      </span>
-    </div>
-    <input type="password" class="form-control" id="inputPassword" [(ngModel)]="user.userPassword" required placeholder="Password">
-  </div>
-  <div class="input-group col-md-12 p-0 m-3">
-    <div class="input-group-prepend">
-      <span class="input-group-text" id="inputPassword2Prepend">
-        <img width="20px" src="https://cdn4.iconfinder.com/data/icons/glyphs/24/icons_password-512.png"/>
-      </span>
-    </div>
-    <input type="password" class="form-control" id="inputPassword2" placeholder="Confirm password">
-  </div>
-  <div class="input-group justify-content-between ml-5">
-    <div class="dropdown">
-      <button class="btn btn-warning dropdown-toggle" type="button" id="dropdownMenu2" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-        Role
-      </button>
-      <div class="dropdown-menu" aria-labelledby="dropdownMenu2">
-        <button value="user" class="dropdown-item" type="button" (click)="setRole1()">User</button>
-        <button value="company" class="dropdown-item" type="button">Company</button>
+            </div>
+            <input type="date" class="form-control" id="inputDate" formControlName="userBirthDate" required>
       </div>
     </div>
-    <button type="submit" (click)="onSubmit()" class="btn btn-danger">Sign up</button>
-  </div>
+    </abbr>
+    <div class="form-group">
+      <div class="input-group">
+        <div class="input-group-prepend">
+          <span class="input-group-text"><i class="fas fa-user"></i></span>
+        </div>
+        <input type="text" placeholder="Login" class="form-control" formControlName="userLogin">
+      </div>
+    </div>
+    <div class="form-group">
+      <div class="input-group">
+        <div class="input-group-prepend">
+          <span class="input-group-text"><i class="fas fa-unlock"></i></span>
+        </div>
+        <input type="password" placeholder="Password" class="form-control" formControlName="userPassword">
+      </div>
+    </div>
+    <div class="row justify-content-between">
+      <div class="dropdown">
+        <button class="btn btn-warning dropdown-toggle" type="button" id="dropdownMenu2" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+          {{user.role.role}}
+        </button>
+        <div class="dropdown-menu" aria-labelledby="dropdownMenu2">
+          <button class="dropdown-item" *ngFor="let role of roles" type="button"
+                  (click)="setRole(role)">{{role.role}}</button>
+        </div>
+      </div>
+      <button class="btn btn-danger m-2" type="submit" [disabled]="!userForm.valid" (click)="onSubmit()">Submit</button>
+    </div>
+  </form>
 </div>
-{{user | json}}
-<br/>
-{{user2 | json}}
+
+-->

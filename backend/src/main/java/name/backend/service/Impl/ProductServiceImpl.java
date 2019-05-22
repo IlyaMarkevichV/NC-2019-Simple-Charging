@@ -1,7 +1,9 @@
 package name.backend.service.Impl;
 
 import name.backend.Entities.ProductEntity;
+import name.backend.Entities.UserEntity;
 import name.backend.repository.ProductRepository;
+import name.backend.repository.UserRepository;
 import name.backend.service.ProductService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
@@ -13,6 +15,8 @@ public class ProductServiceImpl implements ProductService {
     @Autowired
     ProductRepository productRepository;
 
+    @Autowired
+    UserRepository userRepository;
 
     @Override
     public Page<ProductEntity> findProductsPage(Pageable pageable) {
@@ -26,6 +30,18 @@ public class ProductServiceImpl implements ProductService {
 
     @Override
     public ProductEntity saveProduct(ProductEntity product) {
+        UserEntity userEntity = userRepository.findByUserLogin(product.getUser().getUserLogin());
+        product.setUser(userEntity);
         return productRepository.save(product);
+    }
+
+    @Override
+    public void deleteProduct(int id) {
+        productRepository.deleteById(id);
+    }
+
+    @Override
+    public ProductEntity getProductById(int id) {
+        return productRepository.findById(id).get();
     }
 }

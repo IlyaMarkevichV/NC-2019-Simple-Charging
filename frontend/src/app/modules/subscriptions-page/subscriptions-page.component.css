@@ -1,0 +1,8 @@
+.card{
+  width: 16rem;
+  margin: 20px;
+}
+
+#cards{
+  min-height : 470px;
+}

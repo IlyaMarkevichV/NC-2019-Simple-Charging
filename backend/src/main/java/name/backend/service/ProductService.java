@@ -8,4 +8,6 @@ public interface ProductService {
     Page<ProductEntity> findProductsPage(Pageable pageable);
     Page<ProductEntity> searchProduct(Pageable pageable, String string);
     ProductEntity saveProduct(ProductEntity product);
+    void deleteProduct(int id);
+    ProductEntity getProductById(int id);
 }

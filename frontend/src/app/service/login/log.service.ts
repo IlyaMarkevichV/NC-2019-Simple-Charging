@@ -2,6 +2,9 @@ import {Injectable} from "@angular/core";
 import {LoginUser} from "../../model/loginUser";
 import {Router} from "@angular/router";
 import {HttpClient, HttpHeaders} from "@angular/common/http";
+import {Observable} from "rxjs";
+
+const TOKEN_KEY = 'AuthToken';
 
 @Injectable()
 export class LogUserService{
@@ -17,5 +20,8 @@ export class LogUserService{
     return this.http.post('/api/token/generate-token', param, {headers});
   }
 
+  getUser():Observable<any>{
+    return this.http.get('/api/user/username',{headers:{'Authorization':localStorage.getItem(TOKEN_KEY)}});
+  }
 
 }

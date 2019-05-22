@@ -2,13 +2,14 @@ package name.backend.Entities;
 
 import javax.persistence.*;
 import java.sql.Date;
+import java.time.LocalDate;
 
 @Entity
 @Table(name = "subscription", schema = "chargingdb", catalog = "")
 public class SubscriptionEntity {
     private int subId;
-    private Date subBegin;
-    private Date subEnd;
+    private LocalDate subBegin;
+    private LocalDate subEnd;
     private ProductEntity product;
     private WalletEntity wallet;
 
@@ -25,21 +26,21 @@ public class SubscriptionEntity {
 
     @Basic
     @Column(name = "sub_begin")
-    public Date getSubBegin() {
+    public LocalDate getSubBegin() {
         return subBegin;
     }
 
-    public void setSubBegin(Date subBegin) {
+    public void setSubBegin(LocalDate subBegin) {
         this.subBegin = subBegin;
     }
 
     @Basic
     @Column(name = "sub_end")
-    public Date getSubEnd() {
+    public LocalDate getSubEnd() {
         return subEnd;
     }
 
-    public void setSubEnd(Date subEnd) {
+    public void setSubEnd(LocalDate subEnd) {
         this.subEnd = subEnd;
     }
 
@@ -65,7 +66,7 @@ public class SubscriptionEntity {
         return result;
     }
 
-    @ManyToOne(cascade = CascadeType.ALL)
+    @ManyToOne
     @JoinColumn(name="sub_product_id")
     public ProductEntity getProduct() {
         return product;
@@ -75,7 +76,7 @@ public class SubscriptionEntity {
         this.product = product;
     }
 
-    @ManyToOne(cascade = CascadeType.ALL)
+    @ManyToOne
     @JoinColumn(name = "sub_wallet_id")
     public WalletEntity getWallet() {
         return wallet;

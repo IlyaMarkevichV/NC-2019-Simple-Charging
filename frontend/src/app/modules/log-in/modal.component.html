@@ -8,13 +8,37 @@
         </button>
       </div>
       <div class="modal-body">
-        <div class="input-group mb-3">
+        <form class="form-horizontal" [formGroup]="form">
+          <div class="form-group" [ngClass]="displayFieldCss('login')">
+            <div class="col-sm-12">
+              <input type="text" id="modalLogin" class="form-control" formControlName="login" placeholder="Login">
+              <app-field-error-display
+                [displayError]="isFieldValid('login')"
+                errorMsg="Enter Login">
+              </app-field-error-display>
+            </div>
+          </div>
+
+          <div class="form-group" [ngClass]="displayFieldCss('password')">
+            <div class="col-sm-12">
+              <input type="password" id="modalPassword" class="form-control" formControlName="password" placeholder="Password">
+              <app-field-error-display
+                [displayError]="isFieldValid('password')"
+                errorMsg="Enter Password">
+              </app-field-error-display>
+            </div>
+          </div>
+        </form>
+        <div *ngIf="isAlert" class="alert alert-danger">
+          Wrong password or login!
+        </div>
+        <!--<div class="input-group mb-3">
           <div class="input-group-prepend">
             <span class="input-group-text" id="inputLogPrepend">
              <img width="20px" src="https://png.pngtree.com/svg/20160308/_user_profile_icon_1108089.png"/>
             </span>
           </div>
-          <input type="text" class="form-control" id="inputLog" [(ngModel)]="user.login" placeholder="Login">
+          <input type="text" class="form-control" id="inLogin" [(ngModel)]="user.login" placeholder="Login">
         </div>
         <div class="input-group">
           <div class="input-group-prepend">
@@ -22,8 +46,8 @@
               <img width="20px" src="https://cdn4.iconfinder.com/data/icons/glyphs/24/icons_password-512.png"/>
             </span>
           </div>
-          <input type="password" class="form-control" id="inputPass" [(ngModel)]="user.password" placeholder="Password">
-        </div>
+          <input type="password" class="form-control" id="inPassword" [(ngModel)]="user.password" placeholder="Password">
+        </div>-->
       </div>
       <div class="modal-footer border-top-0 justify-content-between">
         <a class="btn btn-light" data-dismiss="modal" routerLink="signin">Sign up</a>
@@ -35,3 +59,5 @@
     </div>
   </div>
 </div>
+
+

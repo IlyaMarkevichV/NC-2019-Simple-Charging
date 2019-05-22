@@ -12,6 +12,6 @@ import java.util.List;
 @ToString
 @NoArgsConstructor
 public class PageDTO {
-    private List productList;
+    private List list;
     private int pages;
 }

@@ -6,6 +6,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.List;
+
 
 @RestController
 @RequestMapping(value = "/api/user")
@@ -27,7 +29,27 @@ public class UserController {
 
     @GetMapping(value = "/username/{login}")
     @ResponseBody
-    public ResponseEntity<String> getUsername(@PathVariable String login){
-        return ResponseEntity.ok(service.findUsername(login).getUserLogin());
+    public ResponseEntity<UserEntity> getUsername(@PathVariable(name = "login") String login){
+        return ResponseEntity.ok(service.findByLogin(login));
+    }
+
+    @GetMapping(value = "/subs")
+    public ResponseEntity<List> getUserSubs(@RequestParam(name = "login") String login){
+        return ResponseEntity.ok(service.getUserSubs(login));
+    }
+
+    @GetMapping(value = "/all")
+    public ResponseEntity<List<UserEntity>> getAllUsers(){
+        return ResponseEntity.ok(service.getAllUsers());
+    }
+
+    @DeleteMapping(value = "/delete")
+    public void deleteUser(@RequestParam(value = "id") int id){
+        service.deleteUser(id);
+    }
+
+    @GetMapping(value = "check")
+    public ResponseEntity<Boolean> check(@RequestParam(value = "login") String login){
+        return ResponseEntity.ok(service.check(login));
     }
 }

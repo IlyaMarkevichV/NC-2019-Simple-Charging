@@ -79,7 +79,7 @@ public class WalletEntity {
         return result;
     }
 
-    @ManyToOne(cascade = CascadeType.ALL)
+    @ManyToOne
     @JoinColumn(name = "wallet_user_id")
     public UserEntity getUser() {
         return user;

@@ -1,7 +1,40 @@
-<header class="header m-3 pl-5">
+<header class="header m-2 pl-5">
   <h3>Your subscriptions</h3>
 </header>
-<div class="form-row justify-content-center w-100">
-  <app-sub-card></app-sub-card>
-  <app-sub-card></app-sub-card>
-</div>
+  <div id="cards" class="row justify-content-center w-100 m-0 align-content-between">
+    <div class="col-md-9">
+      <div class="row">
+        <div class="form-row justify-content-center w-100" >
+          <div class="card" *ngFor="let sub of subList">
+            <div class="form-row justify-content-center">
+              <div class="card-body">
+                <h5 class="card-title">{{sub.product.productName}}</h5>
+                <p class="card-text">{{sub.product.productDescription}}</p>
+                <div class="form-row justify-content-center m-3">
+                  <button type="button" class="btn btn-warning">
+                    <p class="text-dark m-0 small">
+                      {{sub.subBegin}}/{{sub.subEnd}}
+                    </p>
+                  </button>
+                </div>
+                <div class="form-row justify-content-between">
+                  <button class="btn btn-danger" (click)="unsubscribe(sub.subId)">Unsubscribe</button>
+                  <p class="text m-0 pt-2">{{sub.product.productCost}}$</p>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="text-black-50 justify-content-center" *ngIf="subList.length==0"><h1>You have no subscriptions</h1></div>
+    <div class="row justify-content-center w-100 m-0 position-relative" *ngIf="totalpages>1">
+      <div class="btn-group" role="group" aria-label="Basic example">
+        <button type="button" class="btn btn-danger">Prev</button>
+        <button type="button" class="btn btn-danger">{{page+1}}</button>
+        <button type="button" class="btn btn-danger">{{totalpages}}</button>
+        <button type="button" class="btn btn-danger">Next</button>
+      </div>
+    </div>
+  </div>
+

@@ -1,53 +1,62 @@
 package name.backend.controller;
 
+import name.backend.Entities.PageDTO;
 import name.backend.Entities.RoleEntity;
 import name.backend.Entities.UserEntity;
 import name.backend.Entities.WalletEntity;
 import name.backend.service.WalletService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Pageable;
+import org.springframework.data.domain.Sort;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import java.time.LocalDate;
+import java.util.List;
 
 @RestController
-@RequestMapping(value="/api/v1/wallet")
+@RequestMapping(value="/api/wallet")
 public class WalletController {
     @Autowired
     private WalletService service;
 
-    @RequestMapping(value = "/test", method = RequestMethod.GET)
-    public ResponseEntity<WalletEntity> walletController(@RequestParam(name="role_id", defaultValue = "2") Integer id){
-        RoleEntity roleEntity=new RoleEntity();
-        UserEntity userEntity=new UserEntity();
-        WalletEntity walletEntity=new WalletEntity();
-        roleEntity.setRole("admin");
-        userEntity.setRole(roleEntity);
-        userEntity.setUserBirthDate(LocalDate.now());
-        userEntity.setUserEmail("asdasd@asdad.as");
-        userEntity.setUserLogin("Weesqq");
-        userEntity.setUserName("Ilya");
-        userEntity.setUserSurname("Marke");
-        userEntity.setUserPassword("qwerty");
-        walletEntity.setUser(userEntity);
-        walletEntity.setWalletBalance(1.3);
-        walletEntity.setWalletDescr("qweqwe asdasd asd");
-        walletEntity.setWalletName("Wallet");
-        WalletEntity wallet = service.saveWallet(walletEntity);
-        return ResponseEntity.ok(wallet);
+    @GetMapping("/all")
+    public ResponseEntity<PageDTO> loadWallets(@RequestParam(value = "page") int page,
+                                               @RequestParam(value = "login") String login){
+        Page p = service.getAll(new PageRequest(page, 6, new Sort(Sort.Direction.ASC, "walletName")), login);
+        return ResponseEntity.ok(new PageDTO(p.getContent(), p.getTotalPages()));
     }
 
-    @RequestMapping(value = "/test-get", method = RequestMethod.GET)
-    public ResponseEntity<Iterable<WalletEntity>> showAll() {
-        return ResponseEntity.ok(service.findAll(1));
+    @PostMapping("/save")
+    public ResponseEntity<WalletEntity> saveWallet(@RequestBody WalletEntity walletEntity){
+        System.out.println(walletEntity.toString());
+        return ResponseEntity.ok(service.saveWallet(walletEntity));
     }
 
-    @RequestMapping(value = "/test-delete", method = RequestMethod.GET)
-    public ResponseEntity deleteWallet(@RequestParam(name = "id") Integer id) {
+    @DeleteMapping("/delete")
+    public void deleteWallet(@RequestParam(value = "id") int id){
         service.deleteWallet(id);
-        return ResponseEntity.ok().build();
+    }
+
+    @PostMapping("/update")
+    public ResponseEntity<WalletEntity> updateWallet(@RequestBody WalletEntity walletEntity){
+        return ResponseEntity.ok(service.updateWallet(walletEntity));
+    }
+
+    @PostMapping("/topup")
+    public ResponseEntity<WalletEntity> topUpBalance(@RequestBody WalletEntity walletEntity){
+        return ResponseEntity.ok(service.topup(walletEntity));
+    }
+
+    @GetMapping("/getall")
+    public ResponseEntity<List> getAllWallets(@RequestParam(value = "login") String login){
+        return ResponseEntity.ok(service.getAllWallets(login));
+    }
+
+    @PostMapping("/transfer")
+    public void transfer (@RequestBody List<WalletEntity> wallets){
+        service.transfer(wallets);
     }
 }

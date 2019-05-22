@@ -9,10 +9,13 @@
         <a class="nav-link" routerLink="">Home</a>
       </li>
       <li class="nav-item">
-        <a class="nav-link" routerLink="subscriptions">Subscriptions</a>
+        <a class="nav-link" routerLink="subscriptions" *ngIf="isAuthorized && userDTO.role.roleId==2">Subscriptions</a>
       </li>
       <li class="nav-item">
-        <a class="nav-link" routerLink="wallets">Wallets</a>
+        <a class="nav-link" routerLink="wallets" *ngIf="isAuthorized && userDTO.role.roleId!=1">Wallets</a>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link" routerLink="users" *ngIf="isAuthorized && userDTO.role.roleId==1">Users</a>
       </li>
     </ul>
   </div>
@@ -23,9 +26,9 @@
           Sign in
         </button>
       </li>
-      <li class="nav-item dropdown">
+      <li class="nav-item dropleft">
         <a class="nav-link dropdown-toggle active" href="#" id="loginDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" *ngIf="isAuthorized">
-          {{username.username}}
+          {{userDTO.userName}}
         </a>
         <div class="dropdown-menu" aria-labelledby="loginDropdown">
           <a class="dropdown-item" href="#" (click)="logOut()">Log out</a>

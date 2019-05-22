@@ -1,10 +1,17 @@
-<div class="card">
-  <div class="card-body">
-    <h5 class="card-title">Name of card</h5>
-    <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
-    <div class="form-row justify-content-between">
-    <a href="#" class="btn btn-primary">More</a>
-    <p class="text m-0 pt-2">4.9$</p>
-    </div>
+<div class="form-row justify-content-center w-100">
+<header class="header m-3 pl-5">
+  <h2>{{product.productName}}</h2>
+</header>
+</div>
+<div id="descr" class="form-row justify-content-center w-100 ">
+  <div class="form-row text col-md-6 bg-light" >
+    <h2><p>Description:</p></h2>
+    <h3 class="m-4">{{product.productDescription}}</h3>
   </div>
+</div>
+<div class="form-row justify-content-center w-100">
+<div class="form-row text col-md-4 justify-content-between">
+  <h5 class="bg-warning">Category: {{product.category.categoryName}}</h5>
+  <h5 class="bg-danger">Cost: {{product.productCost}}$</h5>
+</div>
 </div>

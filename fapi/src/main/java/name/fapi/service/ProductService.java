@@ -7,4 +7,6 @@ public interface ProductService {
     PageDTO findAllProducts(int p, int s, int d);
     PageDTO searchProduct(String search, int p, int s, int d);
     Product saveProduct(Product product);
+    void deleteProduct(int id);
+    Product getProductById(int id);
 }

@@ -8,4 +8,5 @@ export class Product{
   productCost: string;
   category: Category;
   user: User;
+  usersSub: boolean = false;
 }

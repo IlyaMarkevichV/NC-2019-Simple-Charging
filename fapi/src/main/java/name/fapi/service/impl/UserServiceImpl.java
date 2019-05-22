@@ -1,6 +1,7 @@
 package name.fapi.service.impl;
 
 import name.fapi.module.User;
+import name.fapi.module.UserDTO;
 import name.fapi.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
@@ -13,6 +14,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.web.client.RestTemplate;
 
 import java.util.HashSet;
+import java.util.List;
 import java.util.Set;
 
 @Service("customUserDetailsService")
@@ -38,9 +40,34 @@ public class UserServiceImpl implements UserDetailsService, UserService {
     }
 
     @Override
-    public String getUsername(String login) {
+    public UserDTO getUserDTO(String login) {
         RestTemplate restTemplate = new RestTemplate();
-        return restTemplate.getForObject(backendServerUrl+"/api/user/username/"+login, String.class);
+        User user = restTemplate.getForEntity(backendServerUrl+"/api/user/username/" + login, User.class).getBody();
+        return new UserDTO(user.getUserId(), user.getUserName(), user.getUserLogin(), user.getRole());
+    }
+
+    @Override
+    public List getUserSubs(String login) {
+        RestTemplate restTemplate = new RestTemplate();
+        return restTemplate.getForEntity(backendServerUrl+"/api/user/subs?login="+login, List.class).getBody();
+    }
+
+    @Override
+    public List getAllUsers() {
+        RestTemplate restTemplate = new RestTemplate();
+        return restTemplate.getForEntity(backendServerUrl+"/api/user/all", List.class).getBody();
+    }
+
+    @Override
+    public void deleteUser(int id) {
+        RestTemplate restTemplate = new RestTemplate();
+        restTemplate.delete(backendServerUrl+"/api/user/delete?id={id}", id);
+    }
+
+    @Override
+    public Boolean check(String login) {
+        RestTemplate restTemplate = new RestTemplate();
+        return restTemplate.getForObject(backendServerUrl+"/api/user/check?login={login}", Boolean.class, login);
     }
 
     public UserDetails loadUserByUsername(String login) throws UsernameNotFoundException {

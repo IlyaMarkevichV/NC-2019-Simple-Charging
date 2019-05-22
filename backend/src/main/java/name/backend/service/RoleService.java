@@ -1,7 +1,7 @@
 package name.backend.service;
 
-import name.backend.Entities.RoleEntity;
+import java.util.List;
 
 public interface RoleService  {
-    RoleEntity saveRole(RoleEntity roleEntity);
+    List getAll();
 }

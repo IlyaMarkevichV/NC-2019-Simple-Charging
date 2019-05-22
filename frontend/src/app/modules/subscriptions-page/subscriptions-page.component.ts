@@ -1,4 +1,7 @@
 import {Component, OnInit} from '@angular/core';
+import {SubPageService} from "../../service/subPage/subPage.service";
+import {PageDTO} from "../../model/pageDTO";
+import {Subscription} from "../../model/subscription";
 
 @Component({
   selector: 'app-subscriptions-page',
@@ -7,9 +10,28 @@ import {Component, OnInit} from '@angular/core';
 })
 export class SubscriptionsPageComponent implements OnInit {
 
-  constructor() { }
+  page: number;
+  totalpages: number;
+  pageDTO: PageDTO;
+  subList: Subscription[];
 
-  ngOnInit() {
+  constructor(private service: SubPageService) {
+    this.page=0;
+    this.totalpages=0;
+    this.subList=null;
   }
 
+  ngOnInit() {
+    this.service.getSubscriptions(this.page).subscribe(data=>{
+      this.pageDTO=data as PageDTO;
+      this.totalpages = this.pageDTO.pages;
+      console.log(this.totalpages);
+      this.subList= this.pageDTO.list;
+      console.log(this.subList);
+    })
+  }
+
+  unsubscribe(subId: number){
+    this.service.unsubscribe(subId).subscribe();
+  }
 }
