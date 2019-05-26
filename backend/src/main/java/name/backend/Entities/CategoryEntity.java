@@ -1,7 +1,6 @@
 package name.backend.Entities;
 
 import javax.persistence.*;
-import java.util.Set;
 
 @Entity
 @Table(name = "category", schema = "chargingdb", catalog = "")

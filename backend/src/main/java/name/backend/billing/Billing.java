@@ -21,7 +21,6 @@ public class Billing {
 
     @Scheduled(fixedDelay = 1000 * 10)
     public void billing() {
-        System.out.println(LocalDate.now());
         List<WalletEntity> list = walletRepository.findAllByUserRoleRoleId(2);
         for(int i=0 ; i<list.size(); i++){
             if (subscriptionRepository.findAllByWalletWalletId(list.get(i).getWalletId()).size() != 0) {
@@ -30,12 +29,14 @@ public class Billing {
                     if (sub.getSubBegin().equals(LocalDate.now()) || sub.getSubBegin().isBefore(LocalDate.now()) && sub.getSubEnd().isAfter(LocalDate.now())) {
                         if (list.get(i).getWalletBalance() - sum > 0) {
                             list.get(i).setWalletBalance(list.get(i).getWalletBalance() - sum);
-                            List<WalletEntity> wal = walletRepository.findAllByUserUserLogin(sub.getProduct().getUser().getUserLogin());
-                            wal.get(0).setWalletBalance(wal.get(0).getWalletBalance()+sum);
                             System.out.println(list.get(i).getWalletBalance());
-                            System.out.println(wal.get(0).getWalletBalance());
+                            List<WalletEntity> wal = walletRepository.findAllByUserUserLogin(sub.getProduct().getUser().getUserLogin());
+                            if(!wal.isEmpty()) {
+                                wal.get(0).setWalletBalance(wal.get(0).getWalletBalance() + sum);
+                                System.out.println(wal.get(0).getWalletBalance());
+                                walletRepository.save(wal.get(0));
+                            }
                             walletRepository.save(list.get(i));
-                            walletRepository.save(wal.get(0));
                         }
                         else {
                             subscriptionRepository.deleteById(sub.getSubId());

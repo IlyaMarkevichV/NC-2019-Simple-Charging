@@ -2,7 +2,7 @@
   <h3>Your wallets</h3>
 </header>
 <div id="cards" class="row justify-content-center w-100 m-0 align-content-between">
-  <div class="button">
+  <div class="button" *ngIf="walletList.length==0">
     <button type="button" class="btn btn-light card-body" data-toggle="modal" data-target="#create">
       <img width="50px" src="http://cdn.onlinewebfonts.com/svg/img_115436.png">
     </button>
